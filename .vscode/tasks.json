@@ -2,12 +2,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "🚀 編譯並執行當前檔案 (C++)",
+            "label": "Compile and Run C++",
             "type": "shell",
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-std=c++17",
+                "-Wall",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
@@ -30,8 +32,7 @@
                 "focus": true,
                 "panel": "shared",
                 "clear": true
-            },
-            "detail": "編譯目前開啟的檔案，並立即在終端機執行（適用於解題）。"
+            }
         }
     ]
 }
