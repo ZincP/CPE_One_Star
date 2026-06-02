@@ -30,9 +30,11 @@ int main(){
         string l;
         getline(cin,l);
         for(int i=0;i<l.length();i++){
+            bool okay=false;
+            if(m.count(l[i]) == 0) continue;
             for(int j=0;j<m[l[i]].size();j++){
                 int check=0;
-                if(i>0){
+                if(i>0 && m.count(l[i-1])==1){
                     for(int k=0;k<m[l[i-1]].size();k++){
                         if(m[l[i-1]][k]==m[l[i]][j]){check++;}
                     }
@@ -43,7 +45,7 @@ int main(){
         for(int i=0;i<10;i++){
             cout << v.at(i) << (i==9? "":" ");
         }
-        cout << (n==0? "":"\n");
+        cout << "\n";
     }
 }
 
