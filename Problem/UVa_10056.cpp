@@ -10,10 +10,11 @@ int main()
     int ii;
     double p;
     cin >> n >> p >> ii;
+    if(p< 1e-7){cout << "0.0000\n";}else{
     double num=pow(1-p,ii-1)/(1-pow(1-p,n))*p;
     cout << fixed << setprecision(4);
     cout << num << "\n";
-  }
+  }}
   return 0;
 }
 

@@ -1,34 +1,41 @@
 #include <stdio.h>
 #include <string.h>
 
+int main() {
+    char sentences[105][105];
+    int count = 0;
+    int max_length = 0;
 
-int main (){
-    char str[100][100];
-    int max_length=0;
-    int row=0;
+//☆*: .｡. o(≧▽≦)o .｡.:*☆
 
-
-   
-    while (fgets(str[row], sizeof(str[row]), stdin) != NULL){
-        row++;    
-    }
-    for (int i = 0; i < row; i++){
-        if (strlen(str[i]) > max_length){
-            max_length = strlen(str[i]);
+    for (int i = 0; i < 105; i++) {
+        for (int j = 0; j < 105; j++) {
+            sentences[i][j] = '\0';
         }
     }
-    for(int i=0 ; i<row ; i++){
-        int len = strlen(str[i]);
-   
-        for (int j = 0; j < max_length; j++)
-        if (j > len){
-            str[i][j] = ' ';
+
+    while (fgets(sentences[count], 105, stdin)) {
+        int len = strlen(sentences[count]);
+        if (sentences[count][len - 1] == '\n') {
+            sentences[count][len - 1] = '\0';
+            len--;
         }
+        if (len > max_length) {
+            max_length = len;
+        }
+        count++;
     }
+
     for (int i = 0; i < max_length; i++) {
-        for (int j = row - 1; j >= 0; j--) {
-            printf("%c", str[j][i]);
+        for (int j = count - 1; j >= 0; j--) {
+            if (i < strlen(sentences[j])) {
+                putchar(sentences[j][i]);
+            } else {
+                putchar(' ');
+            }
         }
-        printf("\n");
+        putchar('\n');
     }
+
+    return 0;
 }

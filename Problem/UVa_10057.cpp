@@ -1,31 +1,41 @@
-#include <stdio.h>
-#include <string.h>
+#include <bits/stdc++.h>
+using namespace std;
 
+int main() {
+    int n;
+    while (cin >> n) {
+        vector<int> vec(n);
+        for (int i = 0; i < n; ++i) {
+            cin >> vec[i];
+        }
 
-char x[1111];
-int main () {
-    while (1) {
-        scanf("%1110s", x);
-        if (strcmp(x, "0") == 0) break;  
-        int degree = 0;
-        int sum;
-        char temp[1111];
-        strcpy(temp, x);
-        while (1) {
-            sum = 0;
-            for (int i = 0; temp[i] != '\0'; i++) {
-                sum = sum + temp[i] - '0';
+        sort(vec.begin(), vec.end());
+
+        int mid1 = (n - 1) / 2;
+        int mid2 = n / 2;
+
+        int ans1 = vec[mid1];
+        int ans2 = 0;
+        int ans3 = 0;
+
+        if (n % 2 != 0) {
+            ans3 = 1;
+            for (int i = 0; i < n; ++i) {
+                if (vec[i] == ans1) {
+                    ans2++;
+                }
             }
-            degree++;
-            if (sum == 9) break;
-            if (sum % 9 != 0) break;
-            sprintf(temp, "%d", sum);
+        } else {
+            ans3 = vec[mid2] - vec[mid1] + 1;
+            for (int i = 0; i < n; ++i) {
+                if (vec[i] >= vec[mid1] && vec[i] <= vec[mid2]) {
+                    ans2++;
+                }
+            }
         }
-        if (sum==9) {
-            printf("%s is a multiple of 9 and has 9-degree %d.\n", x, degree);
-        }
-        else {
-            printf("%s is not a multiple of 9.\n", x);
-        }
+
+        cout << ans1 << " " << ans2 << " " << ans3 << "\n";
     }
+
+    return 0;
 }
