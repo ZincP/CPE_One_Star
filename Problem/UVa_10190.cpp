@@ -1,26 +1,36 @@
 #include <stdio.h>
 
-int main(){
-    long long int a,b;
-    long long int k[10000];
-    int kcnt;
-    while(scanf("%lld %lld",&a,&b)!=EOF){
-        kcnt=1;
-        k[0]=a;
-        int boo=0;
-        while(a!=1){
-            if(b==0 || b==1 || a%b!=0){
-                printf("Boring!\n");
-                boo++;
-                break;
-            }else{
-                a=a/b;
-                k[kcnt++]=a;
-            }
+int main() {
+    long long int n, m;
+    
+    while (scanf("%lld %lld", &n, &m) != EOF) {
+        if (n < 2 || m < 2 || n < m) {
+            printf("Boring!\n");
+            continue;
         }
-        if(boo==0){
-            for(int i=0;i<kcnt-1;i++){printf("%lld ",k[i]);}
+
+        long long int seq[100]; 
+        int cnt = 0;
+        long long int temp = n;
+        bool is_boring = false;
+
+        while (temp > 1) {
+            if (temp % m != 0) {
+                is_boring = true;
+                break;
+            }
+            seq[cnt++] = temp;
+            temp /= m;
+        }
+
+        if (is_boring) {
+            printf("Boring!\n");
+        } else {
+            for (int i = 0; i < cnt; i++) {
+                printf("%lld ", seq[i]);
+            }
             printf("1\n");
         }
     }
+    return 0;
 }

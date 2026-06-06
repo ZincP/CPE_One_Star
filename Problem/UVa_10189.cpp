@@ -1,31 +1,43 @@
-#include <stdio.h>
-#include <string.h>
+#include <bits/stdc++.h>
 
+using namespace std;
 
-char x[1111];
-int main () {
-    while (1) {
-        scanf("%1110s", x);
-        if (strcmp(x, "0") == 0) break;  
-        int degree = 0;
-        int sum;
-        char temp[1111];
-        strcpy(temp, x);
-        while (1) {
-            sum = 0;
-            for (int i = 0; temp[i] != '\0'; i++) {
-                sum = sum + temp[i] - '0';
+int dx[] = {-1, -1, -1, 0, 0, 1, 1, 1};
+int dy[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+int main() {
+    int n, m;
+    int fieldNum = 1;
+    
+    while (cin >> n >> m && (n != 0 || m != 0)) {
+        if (fieldNum > 1) cout << endl;
+        
+        vector<string> grid(n);
+        for (int i = 0; i < n; i++) {
+            cin >> grid[i];
+        }
+        
+        cout << "Field #" << fieldNum << ":" << endl;
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == '*') {
+                    cout << '*';
+                } else {
+                    int count = 0;
+                    for (int d = 0; d < 8; d++) {
+                        int nx = i + dx[d];
+                        int ny = j + dy[d];
+                        if (nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] == '*') {
+                            count++;
+                        }
+                    }
+                    cout << count;
+                }
             }
-            degree++;
-            if (sum == 9) break;
-            if (sum % 9 != 0) break;
-            sprintf(temp, "%d", sum);
+            cout << endl;
         }
-        if (sum==9) {
-            printf("%s is a multiple of 9 and has 9-degree %d.\n", x, degree);
-        }
-        else {
-            printf("%s is not a multiple of 9.\n", x);
-        }
+        fieldNum++;
     }
+    return 0;
 }
